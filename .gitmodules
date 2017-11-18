@@ -1,0 +1,3 @@
+[submodule "blockies"]
+	path = blockies
+	url = https://github.com/dylanseago/blockies.git

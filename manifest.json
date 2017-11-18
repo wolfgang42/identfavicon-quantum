@@ -1,0 +1,13 @@
+{
+
+  "manifest_version": 2,
+  "name": "IdentFavIcon Quantum",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
