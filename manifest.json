@@ -2,7 +2,15 @@
 
   "manifest_version": 2,
   "name": "IdentFavIcon Quantum",
+  "short_name": "IdentFavIcon",
+  "description": "Automatically generated favicons for sites without one.",
   "version": "1.0",
+  "author": "Wolfgang Faust",
+  "homepage_url": "https://www.github.com/wolfgang42/identfavicon-quantum",
+  "icons": {
+    "48": "icon/identfavicon-quantum-48.png",
+    "96": "icon/identfavicon-quantum-96.png"
+  },
   "permissions": [
     "tabs",
     "*://*/*"
