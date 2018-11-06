@@ -4,13 +4,12 @@
     "web-ext": "^2.9.1"
   },
   "webExt": {
-    "sourceDir": "output/"
+    "sourceDir": "src/"
   },
   "scripts": {
     "lint": "web-ext lint -w",
-    "assemble-files": "cp -r src/manifest.json src/background.js icon/ output/",
-    "assemble-inject": "cat src/blockies/blockies.js src/inject-core.js > output/inject.js",
-    "assemble": "mkdir -p output && npm run assemble-files && npm run assemble-inject && npm run lint",
+    "assemble-inject": "cat blockies/blockies.js src/inject-core.js > src/inject.js",
+    "assemble": "npm run assemble-inject && npm run lint",
     "build": "npm run assemble && web-ext build"
   }
 }

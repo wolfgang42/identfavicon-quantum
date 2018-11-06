@@ -1,4 +1,4 @@
-# <img src="icon/identfavicon-quantum-96.png" width="32" height="32"/> IdentFavIcon Quantum
+# <img src="src/icon/identfavicon-quantum-96.png" width="32" height="32"/> IdentFavIcon Quantum
 Automatically generated favicons for sites without one.
 
 <img src="screenshot.png" align="center"/>
