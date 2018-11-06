@@ -1,5 +1,5 @@
 function inject(tab) {
- 	browser.tabs.executeScript(tab.id, {
+	browser.tabs.executeScript(tab.id, {
 		file: 'inject.js',
 	})
 }
