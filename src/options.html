@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            padding: 2em;
+        }
+
+        form {
+            width: 100%;
+            clear: both;
+        }
+
+        form input {
+            width: 100%;
+            clear: both;
+        }
+
+        input {
+            display: inline-block;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="browser-style">
+        <label>Block size</label>
+        <input type="text" id="id_block_size">
+        <label>Foreground color</label>
+        <input type="text" id="id_fg_color">
+        <label>Background color</label>
+        <input type="text" id="id_bg_color">
+        <label>Spot color</label>
+        <input type="text" id="id_spot_color">
+        <button type="submit" class="browser-style">Save</button>
+    </form>
+    <script src="options.js"></script>
+</body>
+
+</html>
