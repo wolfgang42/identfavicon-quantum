@@ -1,41 +1,41 @@
 (function () {
     // The random number is a js implementation of the Xorshift PRNG
-    var randseed = new Array(4); // Xorshift: [x, y, z, w] 32 bit values
+    // Xorshift: [x, y, z, w] 32 bit values
 
-    function seedrand(seed) {
-        for (var i = 0; i < randseed.length; i++) {
-            randseed[i] = 0;
+    function seedrand(state, seed) {
+        for (var i = 0; i < state.length; i++) {
+            state[i] = 0;
         }
         for (var i = 0; i < seed.length; i++) {
-            randseed[i % 4] = ((randseed[i % 4] << 5) - randseed[i % 4]) + seed.charCodeAt(i);
+            state[i % 4] = ((state[i % 4] << 5) - state[i % 4]) + seed.charCodeAt(i);
         }
     }
 
-    function rand() {
+    function rand(state) {
         // based on Java's String.hashCode(), expanded to 4 32bit values
-        var t = randseed[0] ^ (randseed[0] << 11);
+        var t = state[0] ^ (state[0] << 11);
 
-        randseed[0] = randseed[1];
-        randseed[1] = randseed[2];
-        randseed[2] = randseed[3];
-        randseed[3] = (randseed[3] ^ (randseed[3] >> 19) ^ t ^ (t >> 8));
+        state[0] = state[1];
+        state[1] = state[2];
+        state[2] = state[3];
+        state[3] = (state[3] ^ (state[3] >> 19) ^ t ^ (t >> 8));
 
-        return (randseed[3] >>> 0) / ((1 << 31) >>> 0);
+        return (state[3] >>> 0) / ((1 << 31) >>> 0);
     }
 
-    function createColor() {
+    function createColor(state) {
         //saturation is the whole color spectrum
-        var h = Math.floor(rand() * 360);
+        var h = Math.floor(rand(state) * 360);
         //saturation goes from 40 to 100, it avoids greyish colors
-        var s = ((rand() * 60) + 40) + '%';
+        var s = ((rand(state) * 60) + 40) + '%';
         //lightness can be anything from 0 to 100, but probabilities are a bell curve around 50%
-        var l = ((rand() + rand() + rand() + rand()) * 25) + '%';
+        var l = ((rand(state) + rand(state) + rand(state) + rand(state)) * 25) + '%';
 
         var color = 'hsl(' + h + ',' + s + ',' + l + ')';
         return color;
     }
 
-    function createImageData(size) {
+    function createImageData(state, size) {
         var width = size; // Only support square icons for now
         var height = size;
 
@@ -48,7 +48,7 @@
             for (var x = 0; x < dataWidth; x++) {
                 // this makes foreground and background color to have a 43% (1/2.3) probability
                 // spot color has 13% chance
-                row[x] = Math.floor(rand() * 2.3);
+                row[x] = Math.floor(rand(state) * 2.3);
             }
             var r = row.slice(0, mirrorWidth);
             r.reverse();
@@ -67,13 +67,14 @@
 
         newOpts.seed = opts.seed || Math.floor((Math.random() * Math.pow(10, 16))).toString(16);
 
-        seedrand(newOpts.seed);
+        newOpts.state = new Array(4);
+        seedrand(newOpts.state, newOpts.seed);
 
         // Modification: Call createColor() unconditionally to get a consistent icon
         // regardless of the user-supplied options.
-        const color = createColor();
-        const bgcolor = createColor();
-        const spotcolor = createColor();
+        const color = createColor(newOpts.state);
+        const bgcolor = createColor(newOpts.state);
+        const spotcolor = createColor(newOpts.state);
 
         newOpts.size = opts.size || 8;
         newOpts.scale = opts.scale || 4;
@@ -86,7 +87,7 @@
 
     function renderIcon(opts, canvas) {
         opts = buildOpts(opts || {});
-        var imageData = createImageData(opts.size);
+        var imageData = createImageData(opts.state, opts.size);
         var width = Math.sqrt(imageData.length);
 
         canvas.width = canvas.height = opts.size * opts.scale;
