@@ -1,3 +1,4 @@
+// Derived from https://github.com/dylanseago/blockies/blob/86c3e71ec33a31424ac8dcae449ec9c09c4ab3cb/blockies.js
 (function () {
     // The random number is a js implementation of the Xorshift PRNG
     // Xorshift: [x, y, z, w] 32 bit values
@@ -46,6 +47,7 @@
         for (var y = 0; y < height; y++) {
             var row = [];
             for (var x = 0; x < dataWidth; x++) {
+                // TODO: configurable probability
                 // this makes foreground and background color to have a 43% (1/2.3) probability
                 // spot color has 13% chance
                 row[x] = Math.floor(rand(state) * 2.3);
