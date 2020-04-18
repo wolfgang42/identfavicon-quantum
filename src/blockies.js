@@ -69,11 +69,17 @@
 
         seedrand(newOpts.seed);
 
+        // Modification: Call createColor() unconditionally to get a consistent icon
+        // regardless of the user-supplied options.
+        const color = createColor();
+        const bgcolor = createColor();
+        const spotcolor = createColor();
+
         newOpts.size = opts.size || 8;
         newOpts.scale = opts.scale || 4;
-        newOpts.color = opts.color || createColor();
-        newOpts.bgcolor = opts.bgcolor || createColor();
-        newOpts.spotcolor = opts.spotcolor || createColor();
+        newOpts.color = opts.color || color;
+        newOpts.bgcolor = opts.bgcolor || bgcolor;
+        newOpts.spotcolor = opts.spotcolor || spotcolor;
 
         return newOpts;
     }
