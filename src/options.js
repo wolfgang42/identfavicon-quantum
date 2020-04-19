@@ -5,6 +5,7 @@ function saveOptions(e) {
         fg_color: document.querySelector("#id_fg_color").value,
         bg_color: document.querySelector("#id_bg_color").value,
         spot_color: document.querySelector("#id_spot_color").value,
+        identified_by: document.querySelector("#id_identified_by").value,
     };
     browser.storage.local.set(options);
 }
@@ -15,6 +16,7 @@ async function restoreOptions() {
     document.querySelector("#id_fg_color").value = options.fg_color || '';
     document.querySelector("#id_bg_color").value = options.bg_color || '';
     document.querySelector("#id_spot_color").value = options.spot_color || '';
+    document.querySelector("#id_identified_by").value = options.identified_by || 'host';
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);

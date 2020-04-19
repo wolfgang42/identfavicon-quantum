@@ -15,8 +15,10 @@
 	}
 
 	const options = await browser.storage.local.get();
+	const seed = options.identified_by === 'url'
+		? document.location.href : document.location.host;
 	const theIcon = blockies.create({
-		seed: document.location.host,	// TODO: allow use host:port or url as seed
+		seed: seed,
 		size: options.block_size,
 		color: options.fg_color,
 		bgcolor: options.bg_color,
