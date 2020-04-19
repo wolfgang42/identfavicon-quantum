@@ -20,6 +20,7 @@
 	const theIcon = blockies.create({
 		seed: seed,
 		size: options.block_size,
+		icon_size: options.icon_size,
 		color: options.fg_color,
 		bgcolor: options.bg_color,
 		spotcolor: options.spot_color,

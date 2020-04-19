@@ -79,7 +79,11 @@
         const spotcolor = createColor(newOpts.state);
 
         newOpts.size = opts.size || 8;
-        newOpts.scale = opts.scale || 4;
+        // Modification: icon_size is used instead of size * scale to avoid blurred icon
+        newOpts.icon_size = opts.icon_size || opts.size * 3;
+        if (newOpts.icon_size < newOpts.size) {
+            newOpts.icon_size = newOpts.size;
+        }
         newOpts.color = opts.color || color;
         newOpts.bgcolor = opts.bgcolor || bgcolor;
         newOpts.spotcolor = opts.spotcolor || spotcolor;
@@ -92,12 +96,13 @@
         var imageData = createImageData(opts.state, opts.size);
         var width = Math.sqrt(imageData.length);
 
-        canvas.width = canvas.height = opts.size * opts.scale;
+        canvas.width = canvas.height = opts.icon_size;
+        var block_width = Math.floor(opts.icon_size / opts.size);
+        var padding = Math.floor((opts.icon_size - opts.size * block_width) / 2);
 
         var cc = canvas.getContext('2d');
         cc.fillStyle = opts.bgcolor;
         cc.fillRect(0, 0, canvas.width, canvas.height);
-        cc.fillStyle = opts.color;
 
         for (var i = 0; i < imageData.length; i++) {
 
@@ -109,7 +114,10 @@
                 // if data is 2, choose spot color, if 1 choose foreground
                 cc.fillStyle = (imageData[i] == 1) ? opts.color : opts.spotcolor;
 
-                cc.fillRect(col * opts.scale, row * opts.scale, opts.scale, opts.scale);
+                cc.fillRect(
+                    padding + col * block_width, padding + row * block_width,
+                    block_width, block_width
+                );
             }
         }
         return canvas;
