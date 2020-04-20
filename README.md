@@ -14,8 +14,6 @@ First, clone the repository and download dependencies:
 ```
 git clone https://github.com/wolfgang42/identfavicon-quantum.git
 cd identfavicon-quantum/
-git submodule init
-git submodule update
 yarn install
 ```
 Then, run the script to autogenerate some files for the extension.
@@ -24,3 +22,5 @@ Then, run the script to autogenerate some files for the extension.
 yarn run assemble
 ```
 This script combines the blockies code and `inject-core.js` into a single file which will be injected into the page to set the page's favicon.
+
+Alternatively, you can just `make` without using `yarn`.

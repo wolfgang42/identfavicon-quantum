@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            padding: 2em;
+        }
+
+        form {
+            width: 100%;
+            clear: both;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            clear: both;
+        }
+
+        input[type="text"] {
+            display: inline-block;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="browser-style">
+        <label>Block size (N x N blocks.)</label>
+        <input type="text" id="id_block_size">
+
+        <label>Icon size (in px, set the exact icon size to avoid blurred icon.)</label>
+        <input type="text" id="id_icon_size">
+
+        <label>Foreground color (CSS color codes, set this field to empty to use generated color.)</label>
+        <input type="text" id="id_fg_color">
+
+        <label>Background color (Hint: Set this field to 'transparent' to make icons more distinguishable.)</label>
+        <input type="text" id="id_bg_color">
+
+        <label>Spot color</label>
+        <input type="text" id="id_spot_color">
+
+        <label>Identified by</label>
+        <br>
+        <select class="browser-style" name="select" id="id_identified_by">
+            <option value="host" selected>host</option>
+            <option value="url">URL</option>
+        </select>
+        <br>
+        <br>
+
+        <button type="submit" class="browser-style">Save</button>
+    </form>
+    <script src="options.js"></script>
+</body>
+
+</html>
