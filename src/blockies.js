@@ -80,7 +80,7 @@
 
         newOpts.size = opts.size || 8;
         // Modification: icon_size is used instead of size * scale to avoid blurred icon
-        newOpts.icon_size = opts.icon_size || opts.size * 3;
+        newOpts.icon_size = opts.icon_size || newOpts.size * 3;
         if (newOpts.icon_size < newOpts.size) {
             newOpts.icon_size = newOpts.size;
         }
